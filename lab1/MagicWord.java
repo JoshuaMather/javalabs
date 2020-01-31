@@ -35,5 +35,23 @@ class magicwordsquare{
       }
       System.out.println("");
     }
+    printRow(arrStr, 0);
+    printColumn(arrStr, 2);
+  }
+
+  public static void printRow(String[][] arrstr, int row){
+    String word = "";
+    for (int k = 0; k<arrstr.length; k++) {
+      word += arrstr[row][k];
+    }
+    System.out.println(word);
+  }
+
+  public static void printColumn(String[][] arrstr, int column){
+    String word = "";
+    for (int k = 0; k<arrstr[column].length; k++) {
+      word += arrstr[k][column];
+    }
+    System.out.println(word);
   }
 }
