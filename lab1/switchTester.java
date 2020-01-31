@@ -1,5 +1,7 @@
-/* class SwitchTester {
-  public static void main(String args[]) {
+import java.util.Scanner;
+
+class SwitchTester {
+/*  public static void main(String args[]) {
     int a = 5;
     int b = 8;
 
@@ -31,5 +33,30 @@
         break;
     }
     System.out.println("b is " + b);
+  }*/
+
+  public static void main(String args[]) {
+    Scanner monthinput = new Scanner(System.in);
+    System.out.println("Enter Month");
+
+    String month = monthinput.nextLine();
+    System.out.println("Month is " + month);
+
+    List<String> winter = new ArrayList<String>();
+    winter.add("December");
+    winter.add("January");
+    winter.add("February");
+
+    seasonSwitch(month);
   }
-} */
+
+  public static void seasonSwitch(String month) {
+
+
+
+
+
+  }
+
+
+}
