@@ -10,6 +10,7 @@ public class Library{
     for(int i = 0; i < bookList.length; i++){
       if(bookList[i] == null){
         bookList[i] = givenBook;
+        break;
       }
     }
   }
@@ -35,6 +36,7 @@ public class Library{
       if(bookList[i] == null){
         bookList[i] = givenBook;
         System.out.println("Returned " + givenBook);
+        break;
       }
     }
   }
@@ -44,6 +46,8 @@ public class Library{
       if(bookList[i] == givenBook){
         bookList[i] = null;
         System.out.println("Borrowed " + givenBook);
+        break;
+        // print message if book not available
       }
     }
   }
@@ -84,5 +88,5 @@ public class Library{
     l.borrowBook(b2);
     l.borrowBook(b2);
     l.borrowBook(b2);
-}
+  }
 }
