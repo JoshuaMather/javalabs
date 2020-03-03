@@ -188,9 +188,10 @@ class ChemicalElement implements Serializable{
     }
 
     public void readObject(){
-      try{
-        FileInputStream fileIn = new FileInputStream(this.getName()+"3.obj");
-        ObjectInputStream in= new ObjectInputStream(fileIn);
+      try(
+      FileInputStream fileIn = new FileInputStream(this.getName()+"3.obj");
+      ObjectInputStream in= new ObjectInputStream(fileIn);){
+
 
         try{
           ChemicalElement el = (ChemicalElement) in.readObject();
@@ -205,7 +206,8 @@ class ChemicalElement implements Serializable{
       }catch (IOException e) {
         e.printStackTrace();
       } finally{
-
+        System.out.println("a");
+        throw new RuntimeException("exception");
       }
 
     }
