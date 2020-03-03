@@ -25,8 +25,14 @@ public class ElementDriver {
         System.out.println(Arrays.toString(oxygen.toJSONLines()));
         System.out.println(Arrays.toString(nitrogen.toJSONLines()));*/
 
-        hydrogen.writeJSONFromLines();
+        /*hydrogen.writeJSONFromLines();
         oxygen.writeJSONFromLines();
-        nitrogen.writeJSONFromLines();
+        nitrogen.writeJSONFromLines();*/
+
+        hydrogen.writeJSON();
+        oxygen.writeJSON();
+        nitrogen.writeJSON();
+
+        System.out.println(oxygen.readJSON("Oxygen.txt"));
     }
 }

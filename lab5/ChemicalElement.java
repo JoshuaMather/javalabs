@@ -1,6 +1,9 @@
 import java.util.Arrays;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.File;
+import java.io.*;
+import java.io.Serialazable;
 
 class ChemicalElement {
 
@@ -87,7 +90,85 @@ class ChemicalElement {
 
     public void writeJSONFromLines(){
       String[] lines = toJSONLines();
-      FileWriter fileWriter = new FileWriter(this.getName()+".txt");
+      File file = new File(this.getName()+".txt");
+      try(FileWriter fileWriter = new FileWriter(file)){
+
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+
+        for(int i=0; i<lines.length; i++){
+          printWriter.println(lines[i]);
+        }
+
+        fileWriter.close();
+        printWriter.close();
+      }catch(IOException e){
+        System.out.println("Error");
+      }
+
     }
+
+    public void writeJSON(){
+      String fileContent = toJSON();
+      File file = new File(this.getName()+"2.txt");
+
+      try(FileWriter fileWriter = new FileWriter(file)){
+        fileWriter.write(fileContent);
+
+        fileWriter.close();
+      }catch(IOException e){
+        System.out.println("Error");
+      }
+    }
+
+    public ChemicalElement readJSON(String file){
+      try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file))){
+
+        String line = bufferedReader.readLine();
+
+        while (line != null){
+          System.out.println(line);
+
+          String name = "";
+          String symbol = "";
+          int atomicNumber = -1;
+          String[] bonds = {};
+          System.out.println(bonds);
+
+          String[] parts = line.strip().split(":"); // needs java 11
+
+          String clean_value = parts[1].split(",")[0].strip();
+
+          switch (parts[0]) {
+            case "\"atomicNumber\"":
+              atomicNumber = Integer.parseInt(clean_value);
+              break;
+            case "\"bondsWith\"":
+              clean_value = "[\"Cl\", \"H\"]".substring(
+                      1, clean_value.length()
+                  );
+              bonds = clean_value.split(",");
+              break;
+            case "\"name\"":
+              name = clean_value;
+              break;
+            case "\"symbol\"":
+              symbol = clean_value;
+              break;
+          }
+
+          line = bufferedReader.readLine();
+        }
+
+
+        bufferedReader.close();
+        return new ChemicalElement(name, symbol, atomicNumber, bonds);
+
+      }catch(IOException e){
+        System.out.println("Error");
+        return null;
+      }
+    }
+
+
 
 }

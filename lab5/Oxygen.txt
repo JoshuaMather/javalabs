@@ -1,0 +1,6 @@
+{
+     "atomicNumber": 8,
+     "bondsWith": [O, H, C],
+     "name": Oxygen,
+     "symbol": O
+}
