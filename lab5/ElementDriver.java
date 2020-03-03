@@ -33,6 +33,8 @@ public class ElementDriver {
         oxygen.writeJSON();
         nitrogen.writeJSON();
 
-        System.out.println(oxygen.readJSON("Oxygen.txt"));
+        //System.out.println(oxygen.readJSON("Oxygen.txt"));
+        oxygen.writeObject();
+        oxygen.readObject();
     }
 }

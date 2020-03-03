@@ -3,9 +3,11 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.File;
 import java.io.*;
-import java.io.Serialazable;
+import java.io.Serializable;
+import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
 
-class ChemicalElement {
+class ChemicalElement implements Serializable{
 
     private String name;
     private String symbol;
@@ -120,7 +122,7 @@ class ChemicalElement {
       }
     }
 
-    public ChemicalElement readJSON(String file){
+    /*public ChemicalElement readJSON(String file){
       try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file))){
 
         String line = bufferedReader.readLine();
@@ -161,14 +163,52 @@ class ChemicalElement {
 
 
         bufferedReader.close();
+
         return new ChemicalElement(name, symbol, atomicNumber, bonds);
 
       }catch(IOException e){
         System.out.println("Error");
         return null;
       }
+    }*/
+
+    public void writeObject(){
+      try{
+        FileOutputStream fileOut = new FileOutputStream(this.getName()+"3.obj");
+        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+        out.writeObject(this);
+
+        out.close();
+        fileOut.close();
+      } catch (IOException i) {
+        i.printStackTrace();
+      } finally{
+
+      }
     }
 
+    public void readObject(){
+      try{
+        FileInputStream fileIn = new FileInputStream(this.getName()+"3.obj");
+        ObjectInputStream in= new ObjectInputStream(fileIn);
+
+        try{
+          ChemicalElement el = (ChemicalElement) in.readObject();
+          System.out.println(el);
+
+        }catch(ClassNotFoundException i){
+          i.printStackTrace();
+        }
+        in.close();
+        fileIn.close();
+
+      }catch (IOException e) {
+        e.printStackTrace();
+      } finally{
+
+      }
+
+    }
 
 
 }
