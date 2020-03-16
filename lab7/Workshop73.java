@@ -24,10 +24,24 @@ public class Workshop73 extends Application{
         }
       });
 
+
+      //  //Create buttons
+      //  Button bOK = new Button("OK");
+      //  bOK.setOnAction(e->{
+      //    System.out.println("OK button clicked");
+      //  });
+
+
       //Create button and event handler. Defined in the lecture as Mode 1
       Button bCancel = new Button("Cancel");
       CancelHandlerClass handler2 = new CancelHandlerClass();
       bCancel.setOnAction(handler2);
+
+      // Button bCancel = new Button("Cancel");
+      // bCancel.setOnAction(e->{
+      //   System.out.println("Cancel button clicked");
+      // });
+
 
       pane.getChildren().addAll(bOK, bCancel);
       Scene scene = new Scene(pane,200,200);
@@ -47,3 +61,5 @@ public class Workshop73 extends Application{
         System.out.println("Cancel button clicked");
       }
     }}
+
+
