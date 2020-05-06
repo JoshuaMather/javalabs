@@ -1,5 +1,6 @@
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.io.DataInputStream;
 
 public class Reader implements Runnable {
 
@@ -15,14 +16,31 @@ public class Reader implements Runnable {
     }
 
     public synchronized void run() {
-        while (true){
-            try{
-                String s=bq.take();
-                System.out.println("Reader: "+s);
-            }catch(InterruptedException e){
-                System.out.println(e);
-            }
-        }
+        // while (true){
+        //     try{
+        //         String s=bq.take();
+        //         System.out.println("Reader: "+s);
+        //     }catch(InterruptedException e){
+        //         System.out.println(e);
+        //     }
+        // }
+
+
+        while(true){		
+			listenSocket = new	ServerSocket(port);	
+			connection = listenSocket.accept();	
+			connected =	true;		
+			inStream =	connection.getInputStream();		
+			inDataStream =	new	DataInputStream(inStream);	
+			outStream =	connection.getOutputStream	();		
+			outDataStream =	new	DataOutputStream(outStream);	
+			while(connected){	
+                    //create list, add to list, use list size
+					first =	inDataStream.readInt();		
+					second = inDataStream.readInt();		
+					outDataStream.writeInt(first+second);	
+				}		
+}	
     }
 
     public static void main (String args[]){

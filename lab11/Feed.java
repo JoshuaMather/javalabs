@@ -1,4 +1,5 @@
 import java.util.concurrent.BlockingQueue;
+import java.io.DataOutputStream;
 
 public class Feed implements Runnable {
     //CommQueue readerQ;
@@ -22,16 +23,26 @@ public class Feed implements Runnable {
           "Fifth headline"
         };
 
-        for (String hl : headlines) {
-            bq.add(hl);
-            System.out.println("Feed: "+hl+" into queue");
+        // for (String hl : headlines) {
+        //     bq.add(hl);
+        //     System.out.println("Feed: "+hl+" into queue");
 
-            try{
-                Thread.sleep(0);
-            }
-            catch (InterruptedException e){
-                System.out.println(e);
-            }
-        }
+        //     try{
+        //         Thread.sleep(0);
+        //     }
+        //     catch (InterruptedException e){
+        //         System.out.println(e);
+        //     }
+        // }
+
+        connection = new Socket("localhost",	8888);	
+        inStream = connection.getInputStream();	
+        inDataStream = new DataInputStream(inStream);	
+        outStream = connection.getOutputStream();	
+        outDataStream =	new	DataOutputStream(outStream);	
+        outDataStream.writeInt(Integer.parseInt(args[0]));	
+        outDataStream.writeInt(Integer.parseInt(args[1]));	
+        int	result = inDataStream.readInt();	
+        System.out.println("Server	result:	"+result);	
     }
 }
